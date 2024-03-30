@@ -1,0 +1,24 @@
+name: Test Git Command on PR
+
+on:
+  pull_request:
+    types: [opened, synchronize]
+
+jobs:
+  test-git-command:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v2
+
+      - name: Configure Git
+        run: |
+          git config user.email "actions@github.com"
+          git config user.name "GitHub Actions"
+
+      - name: Check Git status
+        run: |
+          git status
+        env:
+          GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
