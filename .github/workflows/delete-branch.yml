@@ -16,4 +16,8 @@ jobs:
 
       - name: Delete branch
         run: |
+          git config user.email "actions@github.com"
+          git config user.name "GitHub Actions"
           git push --delete origin ${{ github.head_ref }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
